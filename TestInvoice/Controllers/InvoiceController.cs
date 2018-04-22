@@ -73,13 +73,13 @@ namespace TestInvoice.Controllers
         {
             ContentResult result = new ContentResult();
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 if (mangeInvoice.set_edit_invoice(invoiceSet))
                 {
                     result.Content = "true";
                 }
-                else
+                else 
                 {
                     result.Content = "false";
                 }
