@@ -1,0 +1,65 @@
+﻿
+#header {
+    height: 70px;
+    background-color: lightslategrey;
+}
+
+body {
+    background-color: #fff;
+}
+
+.input-list {
+    position: absolute;
+}
+
+.en{
+    direction:ltr;
+}
+
+.icon {
+    font-size: 20px;
+}
+.icon-del {
+    color: #ff3333;
+}
+
+.icon-edit {
+    color: #31d71e;
+    font-size: 20px;
+}
+
+.icon-add {
+    font-size: 20px;
+}
+
+.li-border {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: lightslategrey;
+}
+
+#right_navbar {
+    padding-right: 0;
+}
+
+#invoice_container {
+    padding: 50px;
+
+    min-height: 400px;
+}
+
+.pointer{
+    cursor:pointer;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+form {
+    width:100%;
+}
+
+.center{
+    text-align:center;
+}

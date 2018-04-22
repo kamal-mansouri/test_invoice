@@ -1,0 +1,87 @@
+﻿@model TestInvoice.Models.Invoice
+
+<div id="invoice_info" class="row margin" >
+    <form>
+        <div class="row">
+            <div id="customer_input" class="col-md-4 form-group">
+                <label for="customer">مشتری</label>
+                <input id="customer" value="@Model.customer.Fullname" onkeyup="show_items('customer' , this , 'customer_list');" onblur="lost_focus('customer');" data-selctedid="@Model.customer.Id" data-isvalid="true" class="form-control" required>
+                <ul id="customer_list" class="list-group input-list"></ul>
+            </div>
+            <div class="col-md-4 form-group">
+                @Html.LabelFor(model => model.Discount)
+                @Html.TextBoxFor(model => model.Discount, new { @class = "form-control en", onkeydown = "return isNumber(event);" , required = "true" })
+            </div>
+        </div>
+        <div id="details" class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">نام کالا</th>
+                        <th scope="col">قیمت واحد</th>
+                        <th scope="col">تعداد</th>
+                        <th scope="col">جمع</th>
+                    </tr>
+                </thead>
+                <tbody id="detail_content">
+                @if (Model.invoiceDetails != null)
+                {
+                    int counter = 1;
+
+                    foreach (var item in Model.invoiceDetails)
+                    {
+                    <tr id="_@item.Id">
+                        <th scope="row">@(counter++)</th>
+                        <th>
+                            <input id="commodity_@item.Id" value="@item.commodity.Title" onkeyup="show_items('commodity' ,this , 'commodity_list_@item.Id');" onblur="lost_focus('commodity_@item.Id');" data-selctedid="@item.CommodityId" data-isvalid="true" class="form-control">
+                            <ul id="commodity_list_@item.Id" class="list-group input-list"></ul>
+                        </th>
+                        <th>
+                            <input id="price_@item.Id" value="@item.Price" class="form-control en" onkeydown="return isNumber(event);" onchange="calculate_total();"  type="text" required>
+                        </th>
+                        <th>
+                            <input id="count_@item.Id" value="@item.Qty" class="form-control en" onkeydown="return isNumber(event);" onchange="calculate_total();"  type="number" required>
+                        </th>
+                        <th id="sum_@item.Id" class="center">0</th>
+                        <th>
+                            <a href="javascript:void(0)" onclick="del_row('_@item.Id');">
+                                <span class="icon icon-del"><i class="fa fa-times-circle"></i></span>
+                            </a>
+                        </th>
+                    </tr>
+                    }
+                }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>
+                            <button type="button" class="btn btn-outline-success" onclick="add_row();">سطر جدید <i class="fa fa-plus-circle icon"></i></button>
+                        </th>
+                        <th></th>
+                        <th class="en" scope="col">جمع کل</th>
+                        <th scope="col"><span id="total">@Model.TotalNet</span></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <br />
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <button type="button" class="btn btn-primary col-md-6" onclick="set_invoice_alert('@ViewBag.ActionType', '@Model.Id');">
+                    <span>ذخیره &nbsp;&nbsp;<i class="fa fa-check-circle icon"></i></span>
+                </button>
+                <button type="reset" class="btn btn-secondary col-md-5">لغو&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section styles{
+
+}
+
+@section Scripts{
+    <script src="~/Scripts/pages/invoice.js"></script>
+}

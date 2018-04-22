@@ -1,0 +1,9 @@
+﻿@model Dictionary<int , string>
+
+@foreach (var item in Model) {
+    <li id="li_@item.Key" class="list-group-item list-group-item-action pointer" onmousedown="set_item('@item.Key' , '@item.Value' , 'li_@item.Key')">
+        @Html.DisplayFor(modelItem => item.Value)
+    </li>
+}
+
+<a href="#" class="list-group-item list-group-item-action" onmousedown="show_new_box('@ViewBag.type' , '@ViewBag.text');">افزودن @ViewBag.text +</a>

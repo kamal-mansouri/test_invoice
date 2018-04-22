@@ -1,0 +1,52 @@
+﻿@model  IEnumerable<TestInvoice.Models.Invoice>
+
+@{
+    if (ViewBag.WithLayout == "false")
+    {
+        Layout = null;
+    }
+}
+
+<div id="invoice_list" class="row margin">
+    <table class="table center">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>مشتری</th>
+                <th>مبلغ</th>
+                <th>تخفیف</th>
+                <th>تاریخ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int counter = 1;
+
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <th>@(counter++)</th>
+                        <th>@item.customer.Fullname</th>
+                        <th>@item.TotalNet</th>
+                        <th>@item.Discount</th>
+                        <th>@item.RegDate.Value.ToShamsi()</th>
+                        <th>
+                            <a href="javascript:void(0)" onclick="get_section('edit' , '@item.Id' , '@item.customer.Fname');">
+                                <span class="icon icon-edit">&#160;<i class="fa fa-list-ul"></i></span>
+                            </a>
+                            <a href="javascript:void(0)">
+                                <span class="icon icon-del">&#160;<i class="fa fa-times-circle"></i></span>
+                            </a>
+                        </th>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/pages/invoice.js"></script>
+}
