@@ -79,7 +79,7 @@ namespace TestInvoice.Services
                         Qty = item.Qty,
                         InvoiceId = _invoice.Id
                     };
-
+                     
                     db.InvoiceDetailes.Add(_invoiceDetail);
                 }
 
